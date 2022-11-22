@@ -6,9 +6,12 @@ const path = require('path');
 const cors = require('cors');
 const routerUsers = require('./usersAPI/users-router');
 const routerExpenses = require('./expensesAPI/expenses-router');
-const { curdHandler } = require('./curdAPI/curd-controller');
+const routerCategories = require('./categotiesAPI/categories-router');
+const cookieParser = require('cookie-parser');
+const { authMiddleware } = require('./middleware/authMiddleware');
+require('dotenv/config');
 
-// Port-:
+// Port:
 const PORT = process.env.PORT || 8000;
 
 function createServer() {
@@ -19,23 +22,32 @@ function createServer() {
 
   // Middleware:
   app.use(express.json());
-  app.use(cors());
+  app.use(cors({
+    origin: process.env.CLIENT_ORIGIN_URL,
+    credentials: true,
+  }));
+  app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
+
 
   // ======= API Home page:
   app.get('/', (req, res) => {
     const indexHTMLPath = path.join(publicDirPath, 'index.html');
+    res.setHeader('Content-Type', 'text/html')
 
     res.end(fs.readFileSync(indexHTMLPath));
   });
 
-  // ======= CURD:
-  app.get('/crud', curdHandler);
-
   // ======= USERS API:
   app.use('/users', routerUsers);
 
+  // ======= CATEGORIES API:
+  app.use('/categories', routerCategories);
+
   // ======= EXPENSES API:
   app.use('/expenses', routerExpenses);
+
+  // ======= AUTH API:
+  // app.use('/auth');
 
   return app;
 }

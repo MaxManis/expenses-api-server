@@ -15,7 +15,7 @@ const getAllExpenses = async(request, response) => {
     };
 
     if (params.userid) {
-      searchBy.push({ userid: params.userId });
+      searchBy.push({ userid: params.userid });
     }
 
     if (params.category) {
@@ -148,10 +148,11 @@ const deleteExpense = async(req, res) => {
 
       return;
     }
+    const deletedItem = {...expenseFromDB}
+    await expenseFromDB.destroy();
 
-    expenseFromDB.destroy();
-
-    res.sendStatus(204);
+    res.statusCode = 204;
+    res.json(JSON.stringify(deletedItem.dataValues));
   } catch (e) {
     res.sendStatus(500);
   }

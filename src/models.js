@@ -5,7 +5,7 @@ const { sequelize } = require('./db');
 
 const Categories = sequelize.define('categories', {
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
@@ -13,6 +13,10 @@ const Categories = sequelize.define('categories', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  userid: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
 }, {
   tableName: 'accounting-app-categories',
   updatedAt: false,
@@ -28,6 +32,18 @@ const Users = sequelize.define('users', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  activationToken: {
+    type: DataTypes.STRING,
+    field: 'activation_token',
   },
   createdAt: {
     type: DataTypes.DATE,

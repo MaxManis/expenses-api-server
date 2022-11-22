@@ -40,34 +40,5 @@
     </ul>
 
     <hr/>
-
-    <form action="/crud" method="get">
-      <h2>CRUD:</h2>
-      <div>
-        on Create you will get a new category,<br>
-        on Read you will get all the categories,<br>
-        on Update you will update the name <strong>BUT write it in form oldName-=-newName</strong><br>
-        on Delete you will delete the category<br>
-      </div>
-
-      <br>
-
-      <label for="method">Choose a CRUD method:</label>
-      <select name="method" id="method">
-        <option value="create">Create</option>
-        <option value="read">Read</option>
-        <option value="update">Update</option>
-        <option value="delete">Delete</option>
-      </select>
-
-      <br>
-
-      <label for="name">Name of category:</label>
-      <input type="text" name="name" id="name">
-
-      <br>
-
-      <button type="submit">CRUD</button>
-    </form>
   </body>
 </html>
