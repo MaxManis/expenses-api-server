@@ -82,7 +82,6 @@ async function userLogin(request, response) {
       maxAge: 1000 * 60 * 60,
       sameSite: 'none',
       secure: true,
-      domain: process.env.CLIENT_ORIGIN_URL,
     });
 
     response.statusCode = 200;
