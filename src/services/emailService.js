@@ -25,7 +25,7 @@ const sendEmail = async ({ mailTo, subject, content }) => {
 const sendUserActivationLink = (mailTo, token) => {
     const link = `${process.env.CLIENT_ORIGIN_URL}/#/activate/${token}`;
 
-    sendEmail({
+    return sendEmail({
         mailTo,
         subject: 'Activate your XPNS account',
         content: `

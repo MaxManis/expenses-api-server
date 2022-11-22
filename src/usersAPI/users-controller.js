@@ -29,7 +29,7 @@ async function userRegistration(request, response) {
       activationToken,
     });
 
-    sendUserActivationLink(email, activationToken);
+    await sendUserActivationLink(email, activationToken);
 
     response.statusCode = 201;
     response.send(newUser);
