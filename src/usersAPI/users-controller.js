@@ -80,7 +80,7 @@ async function userLogin(request, response) {
 
     response.cookie('token', accessToken, {
       maxAge: 1000 * 60 * 60,
-      sameSite: false,
+      sameSite: 'none',
     });
 
     response.statusCode = 200;
