@@ -1,25 +1,18 @@
 'use strict';
 
-// const database = 'postgres';
-// const username = 'postgres';
-// const password = '159789';
+require('dotenv/config');
 
-// const DBconfig = {
-//   host: 'localhost',
-//   dialect: 'postgres',
-// };
-
-const database = 'railway';
-const username = 'postgres';
-const password = 'AwnDljyLARjOuBegaKfk';
+const database = process.env.DB_DATABASE;
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
 
 const DBconfig = {
-  host: 'containers-us-west-119.railway.app',
-  port: '6458',
-  database: 'railway',
-  username: 'postgres',
-  password: 'AwnDljyLARjOuBegaKfk',
-  dialect: 'postgres',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  dialect: process.env.DB_DIALECT,
 };
 
 module.exports = {

@@ -34,6 +34,7 @@ async function userRegistration(request, response) {
     response.statusCode = 201;
     response.send(newUser);
   } catch (e) {
+    console.log(e);
     response.sendStatus(500);
   }
 }

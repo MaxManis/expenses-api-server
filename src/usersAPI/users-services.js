@@ -8,8 +8,8 @@ async function getByEmail(email) {
     });
 }
 
-function normalize({id, name, email}) {
-    return {id ,name, email};
+function normalize({ id, name, email, activationToken }) {
+    return { id, name, email, active: activationToken ? false : true};
 }
 
 module.exports = {
