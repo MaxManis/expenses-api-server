@@ -21,15 +21,19 @@ async function getGifBySearch(request, response) {
     const data = await rawData.json();
 
     if (!data.data || !data.data.length) {
+      console.error("No data found! No gifs in response.");
       response.sendStatus(404);
       return;
     }
 
-    const randomIndex = getRandomArbitrary(0, data.data.length);
+    const randomIndex = getRandomArbitrary(0, data.data.length - 1);
     const randomGif = data.data[randomIndex || 0];
-    const randomGifUrl = randomGif.images.original.url;
+    // you can use different props from this obj, like original, still, downsized and etc...
+    // console.log(randomGif);
+    const randomGifUrl = randomGif.images.downsized.url;
 
     if (!randomGifUrl) {
+      console.error("No data found! No gif to get.");
       response.sendStatus(404);
       return;
     }
@@ -40,17 +44,19 @@ async function getGifBySearch(request, response) {
         url: randomGifUrl,
         encoding: null,
       },
-      (err, resp, buffer) => {
+      (err, resp, _buffer) => {
         if (!err && resp.statusCode === 200) {
           response.set("Content-Type", "image/gif");
           response.send(resp.body);
         } else {
+          console.error("Cant sent gif to client!");
+          console.error(err, resp.statusCode);
           response.sendStatus(404);
         }
       }
     );
   } catch (e) {
-    console.log(e);
+    console.error(e);
     response.sendStatus(500);
   }
 }
